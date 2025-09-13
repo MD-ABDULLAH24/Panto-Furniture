@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaBagShopping, FaBars } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
+import logo from "../assets/Panto.png"
 
 const NavItem = [
   { path: "/", label: "Furniture" },
@@ -43,7 +44,7 @@ const Navbar = () => {
       <nav className="max-w-screen-2xl container mx-auto flex justify-between items-center py-6 px-4">
         {/* logo  */}
         <Link to="/" className="font-bold">
-          Logo
+          <img src={logo} alt="Logo" />
         </Link>
 
         {/* mobile menu  */}
