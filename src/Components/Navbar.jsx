@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaBagShopping, FaBars } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
@@ -33,18 +33,32 @@ const NavItems = ({toggleMenu}) => {
 const Navbar = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuScroll, setIsMenuScroll] = useState(false)
 
   const toggleMenu = ()=>{
     setMenuOpen(prevState => !prevState)
   }
-
+ 
+  useEffect(()=>{
+    const handleScroll = ()=>{
+      if(window.scrollY > 50 ){
+        setIsMenuScroll(true)
+      }else{
+        setIsMenuScroll(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+    return ()=>{
+      window.addEventListener("scroll", handleScroll)
+    }
+  }, [])
   
   return (
-    <header className={`fixed top-0 left-0 right-0 z-10 transition duration-300 ease-in-out  text-white`}>
+    <header className={`fixed top-0 left-0 right-0 z-10 transition duration-300 ease-in-out   ${isMenuScroll ? "bg-white shadow-md" : "bg-transparent text-white"}`}>
       <nav className="max-w-screen-2xl container mx-auto flex justify-between items-center py-6 px-4">
         {/* logo  */}
         <Link to="/" className="font-bold">
-          <img src={logo} alt="Logo" />
+          <h1 className="font-bold text-3xl">Panto</h1>
         </Link>
 
         {/* mobile menu  */}
